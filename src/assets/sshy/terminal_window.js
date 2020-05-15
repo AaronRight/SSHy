@@ -208,7 +208,7 @@ function startSSHy() {
   // Error checking is done so remove any currently displayed errors
   document.getElementById("failure").style.display = "none";
   document.getElementById("connect").value = "Connecting...";
-  document.getElementById("load-container").style.display = "block";
+  document.getElementById("load-container").style.display = "flex";
 
   // Disable websocket proxy modifications
   document.getElementById("websockURL").disabled = true;
@@ -221,6 +221,7 @@ function startSSHy() {
 
   // Sets up websocket listeners
   ws.onopen = function (e) {
+    console.log(123);
     transport = new SSHyClient.Transport(ws, settings);
     transport.auth.termUsername = termUsername;
     transport.auth.termPassword = termPassword;
@@ -300,8 +301,10 @@ function termInit() {
   }
 
   // clear the modal elements on screen
-  document.getElementById("load-container").style.display = "none";
+  //document.getElementById("load-container").style.display = "none";
   document.getElementById("login_cred").style.display = "none";
+  for (let el of document.getElementsByClassName("xterm-helpers"))
+    el.style.setProperty("height", "0px");
 }
 // Binds custom listener functions to xtermjs's Terminal object
 function startxtermjs() {

@@ -1,4 +1,4 @@
-var wsproxyURL = "localhost";
+var wsproxyURL = "ec2-3-19-142-178.us-east-2.compute.amazonaws.com";
 var wsproxyPorts = { ws: 5999, wss: 6001 };
 var wsproxyProto = "ws";
 

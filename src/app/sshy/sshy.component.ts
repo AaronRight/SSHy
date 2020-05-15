@@ -8,7 +8,7 @@ declare const window_onload: any;
   styleUrls: ["./sshy.component.css"],
 })
 export class SshyComponent implements OnInit {
-  wsproxyURL = "localhost";
+  wsproxyURL = "ec2-3-19-142-178.us-east-2.compute.amazonaws.com";
   wsproxyPorts = { ws: 5999, wss: 6001 };
   wsproxyProto = "ws";
 

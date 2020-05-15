@@ -21,7 +21,7 @@
   height: 220px;
   position: absolute;
   margin: auto;
-  top: -220px;
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
@@ -121,8 +121,16 @@ tbody {
 }
 
 .load-container {
-  padding-left: 125px;
   display: none;
+  justify-content: center;
+  align-items: center;
+  /*display: flex;*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 90;
 }
 
 #load {
@@ -137,7 +145,7 @@ tbody {
   stroke-miterlimit: 10;
   stroke-linecap: round;
   animation: loading-circle 2s linear infinite;
-  stroke: #eee;
+  stroke: #bbb;
   fill: transparent;
 }
 
