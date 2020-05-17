@@ -13,13 +13,31 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/SSHy",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": false,
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "./src/assets/",
+              {
+                "glob": "*.js",
+                "input": "./src/assets/parchment/lib",
+                "output": "./lib"
+              },
+              {
+                "glob": "*.js",
+                "input": "./src/assets/parchment/stories",
+                "output": "./stories"
+              },
+              {
+                "glob": "*.z*",
+                "input": "./src/assets/parchment/stories",
+                "output": "./stories"
+              }
+            ],
             "styles": ["src/styles.css"],
             "scripts": []
           },

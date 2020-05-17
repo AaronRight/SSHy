@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { SshyComponent } from './sshy/sshy.component';
+import { ParchmentComponent } from './parchment/parchment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SshyComponent
+    SshyComponent,
+    ParchmentComponent
   ],
   imports: [
     BrowserModule
