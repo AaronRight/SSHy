@@ -354,29 +354,33 @@ SSHyClient.settings.prototype = {
       return;
     }
 
-    // Adds html background colour
-    term_style.insertRule(
-      "html, body {background-color: " +
-        themeColors.background +
-        " !important;}",
-      0
-    );
-    // Changes the sidenav color
-    term_style.insertRule(
-      ".sidenav {background-color: " +
-        modColorPercent(themeColors.background, -0.2) +
-        " !important;}",
-      0
-    );
-    // Changes the rx and tx color to 10 and 11
-    term_style.insertRule(
-      ".brightgreen {color: " + themeColors.brightGreen + " !important;}",
-      0
-    );
-    term_style.insertRule(
-      ".brightyellow {color: " + themeColors.brightYellow + " !important;}",
-      0
-    );
+    try {
+      // Adds html background colour
+      term_style.insertRule(
+        "html, body {background-color: " +
+          themeColors.background +
+          " !important;}",
+        0
+      );
+      // Changes the sidenav color
+      term_style.insertRule(
+        ".sidenav {background-color: " +
+          modColorPercent(themeColors.background, -0.2) +
+          " !important;}",
+        0
+      );
+      // Changes the rx and tx color to 10 and 11
+      term_style.insertRule(
+        ".brightgreen {color: " + themeColors.brightGreen + " !important;}",
+        0
+      );
+      term_style.insertRule(
+        ".brightyellow {color: " + themeColors.brightYellow + " !important;}",
+        0
+      );
+    } catch (err) {
+      console.log(err);
+    }
 
     this.colorTango = false;
 

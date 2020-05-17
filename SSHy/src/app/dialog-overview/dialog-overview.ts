@@ -46,10 +46,7 @@ export class DialogEntryParchmentComponent {
     this.openDialog();
   }
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewParchment, {
-      width: "90%",
-      height: "90%",
-    });
+    const dialogRef = this.dialog.open(DialogOverviewParchment, {});
     dialogRef.afterClosed().subscribe((result) => {
       this.router.navigate(["../"], { relativeTo: this.route });
     });
@@ -65,12 +62,27 @@ export class DialogEntryParchmentComponent {
   styleUrls: ["dialog-overview.css"],
 })
 export class DialogOverview {
+  sshy_games = [
+    { name: "DoomRL", path: "doomrl", icon: "games" },
+    { name: "Dungeon Crawl", path: "qwerty", icon: "games" },
+    { name: "NetHack", path: "nethack", icon: "games" },
+    { name: "Angband", path: "angband", icon: "games" },
+  ];
+
   parchment_games = [
-    { name: "Curses", path: "/stories/curses.z5" },
-    { name: "ActOfMurder", path: "/stories/ActofMurder.z8" },
-    { name: "Advent", path: "/stories/Advent.z5" },
-    { name: "Misdirection", path: "/stories/Misdirection.z5" },
-    { name: "Troll", path: "/stories/troll.z5.js" },
+    { name: "Curses", path: "/stories/curses.z5", icon: "menu_book" },
+    {
+      name: "Act Of Murder",
+      path: "/stories/ActofMurder.z8",
+      icon: "menu_book",
+    },
+    { name: "Advent", path: "/stories/Advent.z5", icon: "menu_book" },
+    {
+      name: "Misdirection",
+      path: "/stories/Misdirection.z5",
+      icon: "menu_book",
+    },
+    { name: "Troll", path: "/stories/troll.z5.js", icon: "menu_book" },
   ];
   constructor(public dataService: DataService) {}
 }

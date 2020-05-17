@@ -6,7 +6,7 @@
     <title>SSHy.us</title>
 </head>
 
-<body>
+<body #sshy>
     <div id="terminal"></div>
     <div id="settingsNav" class="sidenav" style="width:0;">
         <a href="javascript:;" class="closebtn" onclick="toggleNav(0)">&times;</a>
@@ -75,22 +75,20 @@
                 <table style="width: 100%">
                     <tr>
                         <td><span class="icon-address-book"></span> IP Address:</td>
-                        <td><input type="text" id="ipaddress" placeholder="sshy.us(:22)" style="width: 90%"
-                                onblur="validate(this.id, this.value)" autofocus></td>
+                        <td><input type="text" id="ipaddress" placeholder="sshy.us(:22)" style="width: 90%" autofocus>
+                        </td>
                     </tr>
                     <tr>
                         <td><span class="icon-user-circle-o"></span> Username:</td>
-                        <td><input type="text" id="username" placeholder="username" style="width: 90%"
-                                onblur="validate(this.id, this.value)"></td>
+                        <td><input type="text" id="username" placeholder="username" style="width: 90%"></td>
                     </tr>
                     <tr>
                         <td><span class="icon-eye"></span> Password:</td>
-                        <td><input type="password" id="password" style="width: 90%"
-                                onblur="validate(this.id, this.value)"></td>
+                        <td><input type="password" id="password" style="width: 90%"></td>
                     </tr>
                 </table>
                 <i id="failure" class="failure"></i>
-                <input type="button" id="connect" class="button" value="Connect" onclick="startSSHy()">
+                <input type="button" id="connect" class="button" value="Connect" onclick="baseStartSSHy()">
             </div>
         </div>
 

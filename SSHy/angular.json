@@ -21,7 +21,6 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "./src/assets/",
               {
                 "glob": "*.js",
                 "input": "./src/assets/parchment/lib",
@@ -36,6 +35,16 @@
                 "glob": "*.z*",
                 "input": "./src/assets/parchment/stories",
                 "output": "./stories"
+              },
+              {
+                "glob": "*.js",
+                "input": "./src/assets/sshy/",
+                "output": "./sshy"
+              },
+              {
+                "glob": "*.js",
+                "input": "./src/assets/sshy/src",
+                "output": "./sshy"
               }
             ],
             "styles": ["src/styles.css"],

@@ -1,24 +1,78 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-
-declare const window_onload: any;
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  Inject,
+  Renderer2,
+} from "@angular/core";
+import { DOCUMENT } from "@angular/common";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "sshy",
   templateUrl: "./sshy.component.html",
   styleUrls: ["./sshy.component.css"],
 })
-export class SshyComponent implements OnInit {
-  wsproxyURL = "ec2-3-19-142-178.us-east-2.compute.amazonaws.com";
-  wsproxyPorts = { ws: 5999, wss: 6001 };
-  wsproxyProto = "ws";
+export class SshyComponent implements OnInit, AfterViewInit {
+  meedToLogin = true;
+  gameName: string;
 
-  ws = null;
-  transport = null;
-  settings = null;
-  term = null;
+  @ViewChild("sshy", { static: true }) sshy: ElementRef;
 
-  resizeInterval = null;
+  constructor(
+    private renderer: Renderer2,
+    private route: ActivatedRoute,
+    @Inject(DOCUMENT) private document
+  ) {}
 
-  constructor() {}
-  ngOnInit() {}
+  ngOnInit() {
+    this.gameName = this.route.snapshot.queryParams["game"];
+  }
+
+  ngAfterViewInit() {
+    let scripts = [
+      "./sshy/defines.js",
+      "./sshy/aes.min.js",
+      "./sshy/BigInteger.min.js",
+      "./sshy/randomart.js",
+      "./sshy/struct.min.js",
+      "./sshy/utilities.min.js",
+      "./sshy/terminal_settings.js",
+      "./sshy/SSHyClient.js",
+      "./sshy/message.js",
+      "./sshy/parceler.js",
+      "./sshy/crypto.js",
+      "./sshy/auth_handler.js",
+      "./sshy/rsaKey.js",
+      "./sshy/Hash.min.js",
+      "./sshy/transport.js",
+      "./sshy/dhKex.js",
+      "./sshy/settings.js",
+    ];
+
+    scripts.forEach((el) =>
+      this.renderer.appendChild(this.sshy.nativeElement, this.createScript(el))
+    );
+
+    let prch = this.sshy;
+
+    let element = this.createScript("./sshy/terminal_window.js");
+    element.onload = function () {
+      var evt = document.createEvent("Event");
+      evt.initEvent("load", false, false);
+      prch.nativeElement.dispatchEvent(evt);
+
+      eval("baseStartSSHy()");
+    };
+    this.renderer.appendChild(this.sshy.nativeElement, element);
+  }
+
+  createScript(src) {
+    let element = document.createElement("script");
+    element.src = src;
+    element.type = "text/javascript";
+    return element;
+  }
 }

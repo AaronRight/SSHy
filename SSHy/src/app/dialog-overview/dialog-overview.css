@@ -1,1 +1,37 @@
-/** No CSS for this example */
+.mat-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.mat-list-item {
+  width: 300px !important;
+  height: 70px !important;
+  display: flex;
+  padding: 0;
+}
+
+.mat-raised-button {
+  position: relative;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+}
+
+.mat-raised-button span {
+  align-self: center;
+}
+
+.mat-fab {
+  position: absolute;
+  left: 10%;
+  pointer-events: none;
+  box-shadow: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-divider {
+  margin-top: 10px;
+}

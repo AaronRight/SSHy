@@ -15,7 +15,7 @@ if (window.msCrypto) {
 }
 
 window.onload = function () {
-  document.getElementById("login_cred").style.display = "block";
+  document.getElementById("login_cred").style.display = "none";
   // Sets the default colorScheme to material
   settings = new SSHyClient.settings();
   settings.setColorScheme(1);
@@ -34,10 +34,6 @@ window.onload = function () {
       document.getElementById("connect").click();
       event.preventDefault();
     });
-
-  document.getElementById("ipaddress").value = "3.19.142.178";
-  document.getElementById("username").value = "ubuntu";
-  document.getElementById("password").value = "123";
 };
 
 // Run every time the webpage is resized
@@ -68,7 +64,7 @@ function buildWSProxyURL(portPassed) {
   }
 
   // Build the wsproxyURL up
-  wsproxyURL = wsproxyProto + "://" + wsproxyURL + port + "/";
+  wsproxyURL = wsproxyProto + "://" + baseWsproxyURL + port + "/";
 
   document.getElementById("websockURL").value = wsproxyURL;
 }
@@ -185,11 +181,35 @@ function display_error(err) {
   document.getElementById("failure").style.display = "block";
 }
 // Starts the SSH client in scripts/transport.js
-function startSSHy() {
-  var html_ipaddress = document.getElementById("ipaddress").value;
-  var termUsername = document.getElementById("username").value;
-  var termPassword = document.getElementById("password").value;
+function baseStartSSHy() {
+  var html_ipaddress;
+  var termUsername;
+  var termPassword;
 
+  if (document.getElementById("ipaddress")) {
+    html_ipaddress = document.getElementById("ipaddress").value;
+    termUsername = document.getElementById("username").value;
+    termPassword = document.getElementById("password").value;
+  }
+
+  if (!termUsername) {
+    html_ipaddress = "3.19.142.178";
+    termUsername = "qwerty";
+    termPassword = "123";
+  }
+
+  if (termUsername.length == 0 || termPassword.length == 0) {
+    validate("username", termUsername);
+    validate("password", termPassword);
+    return;
+  }
+
+  buildWSProxyURL();
+
+  connectSSH(html_ipaddress, termUsername, termPassword, wsproxyURL);
+}
+
+function connectSSH(html_ipaddress, termUsername, termPassword, wsproxyURL) {
   // find the port number
   if (html_ipaddress.includes(":")) {
     var split = html_ipaddress.split(":");
@@ -197,12 +217,6 @@ function startSSHy() {
     html_port = validate_port(split[1]);
   } else {
     html_port = 22;
-  }
-
-  if (termUsername.length == 0 || termPassword.length == 0) {
-    validate("username", termUsername);
-    validate("password", termPassword);
-    return;
   }
 
   // Error checking is done so remove any currently displayed errors
@@ -221,7 +235,6 @@ function startSSHy() {
 
   // Sets up websocket listeners
   ws.onopen = function (e) {
-    console.log(123);
     transport = new SSHyClient.Transport(ws, settings);
     transport.auth.termUsername = termUsername;
     transport.auth.termPassword = termPassword;
