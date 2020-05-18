@@ -1,6 +1,7 @@
 import { Component, Inject, Injectable } from "@angular/core";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { ActivatedRoute, Router } from "@angular/router";
+import * as games from "../../assets/games.json";
 
 export interface DialogData {
   animal: string;
@@ -62,28 +63,9 @@ export class DialogEntryParchmentComponent {
   styleUrls: ["dialog-overview.css"],
 })
 export class DialogOverview {
-  sshy_games = [
-    { name: "DoomRL", path: "doomrl", icon: "games" },
-    { name: "Dungeon Crawl", path: "qwerty", icon: "games" },
-    { name: "NetHack", path: "nethack", icon: "games" },
-    { name: "Angband", path: "angband", icon: "games" },
-  ];
+  sshy_games = games.sshy_games;
+  parchment_games = games.parchment_games;
 
-  parchment_games = [
-    { name: "Curses", path: "/stories/curses.z5", icon: "menu_book" },
-    {
-      name: "Act Of Murder",
-      path: "/stories/ActofMurder.z8",
-      icon: "menu_book",
-    },
-    { name: "Advent", path: "/stories/Advent.z5", icon: "menu_book" },
-    {
-      name: "Misdirection",
-      path: "/stories/Misdirection.z5",
-      icon: "menu_book",
-    },
-    { name: "Troll", path: "/stories/troll.z5.js", icon: "menu_book" },
-  ];
   constructor(public dataService: DataService) {}
 }
 

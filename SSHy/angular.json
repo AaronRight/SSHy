@@ -21,6 +21,7 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
+              "./src/assets/games.json",
               {
                 "glob": "*.js",
                 "input": "./src/assets/parchment/lib",
