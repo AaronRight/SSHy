@@ -54,7 +54,18 @@ import { ParchmentComponent } from "./parchment/parchment.component";
           },
         ],
       },
-      { path: "**", redirectTo: "home" },
+      {
+        path: "sshy",
+        component: SshyComponent,
+      },
+      {
+        path: "parchment",
+        component: ParchmentComponent,
+      },
+      {
+        path: "**",
+        redirectTo: "/home",
+      },
     ]),
   ],
   entryComponents: [

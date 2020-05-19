@@ -1,7 +1,8 @@
 import { Component, Inject, Injectable } from "@angular/core";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { ActivatedRoute, Router } from "@angular/router";
-import * as games from "../../assets/games.json";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 export interface DialogData {
   animal: string;
@@ -63,10 +64,19 @@ export class DialogEntryParchmentComponent {
   styleUrls: ["dialog-overview.css"],
 })
 export class DialogOverview {
-  sshy_games = games.sshy_games;
-  parchment_games = games.parchment_games;
+  sshy_games;
+  parchment_games;
 
-  constructor(public dataService: DataService) {}
+  constructor(public dataService: DataService, private http: HttpClient) {
+    this.getJSON().subscribe((data) => {
+      this.sshy_games = data.sshy_games;
+      this.parchment_games = data.parchment_games;
+    });
+  }
+
+  public getJSON(): Observable<any> {
+    return this.http.get("./assets/games.json");
+  }
 }
 
 @Component({
