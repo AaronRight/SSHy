@@ -69,13 +69,14 @@ body {
   white-space: pre-wrap;
 }
 .TextInput {
-  background: 0 0;
+  background: red;
   border: none !important;
   color: inherit;
-  display: inline;
+  /*display: inline;*/
   font: inherit;
   outline: none !important;
   padding: none;
+  width: 95% !important;
 }
 
 .lastinput {

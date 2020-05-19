@@ -41,7 +41,7 @@ import { ParchmentComponent } from "./parchment/parchment.component";
     ReactiveFormsModule,
     RouterModule.forRoot([
       {
-        path: "home",
+        path: "games",
         component: DialogOverview,
         children: [
           {
@@ -61,10 +61,6 @@ import { ParchmentComponent } from "./parchment/parchment.component";
       {
         path: "parchment",
         component: ParchmentComponent,
-      },
-      {
-        path: "**",
-        redirectTo: "/home",
       },
     ]),
   ],
