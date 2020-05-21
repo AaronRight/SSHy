@@ -4,75 +4,43 @@ import {
   AfterViewInit,
   ViewChild,
   ElementRef,
+  Input,
   Inject,
   Renderer2,
 } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 
+declare function window_onload(url: string, login: string, pass: string): any;
+
+@Component({
+  selector: "sshy-silent",
+  templateUrl: "./wrapper.html",
+  styleUrls: ["./css/xterm.css"],
+})
+export class SshySilentComponent implements AfterViewInit {
+  @Input() public url: string;
+  @Input() public login: string;
+  @Input() public pass: string;
+
+  constructor(private route: ActivatedRoute) {}
+  ngAfterViewInit() {
+    if (!this.url) {
+      this.login = this.route.queryParams["value"]["game"];
+      this.url = "ws://localhost:5999/18.218.9.36:22";
+      this.pass = "123";
+    }
+    window_onload(this.url, this.login, this.pass);
+  }
+}
+
 @Component({
   selector: "sshy",
-  templateUrl: "./sshy.component.html",
-  styleUrls: ["./sshy.component.css"],
+  templateUrl: "./index.html",
+  styleUrls: ["./css/xterm.css", "./css/main.css", "./css/fonts.css"],
 })
-export class SshyComponent implements OnInit, AfterViewInit {
-  meedToLogin = true;
-  gameName: string;
-
+export class SshyComponent implements OnInit {
   @ViewChild("sshy", { static: true }) sshy: ElementRef;
-
-  constructor(
-    private renderer: Renderer2,
-    private route: ActivatedRoute,
-    @Inject(DOCUMENT) private document
-  ) {}
-
-  ngOnInit() {
-    this.gameName = this.route.snapshot.queryParams["game"];
-  }
-
-  ngAfterViewInit() {
-    let scripts = [
-      "./sshy/defines.js",
-      "./sshy/aes.min.js",
-      "./sshy/BigInteger.min.js",
-      "./sshy/randomart.js",
-      "./sshy/struct.min.js",
-      "./sshy/utilities.min.js",
-      "./sshy/terminal_settings.js",
-      "./sshy/SSHyClient.js",
-      "./sshy/message.js",
-      "./sshy/parceler.js",
-      "./sshy/crypto.js",
-      "./sshy/auth_handler.js",
-      "./sshy/rsaKey.js",
-      "./sshy/Hash.min.js",
-      "./sshy/transport.js",
-      "./sshy/dhKex.js",
-      "./sshy/settings.js",
-    ];
-
-    scripts.forEach((el) =>
-      this.renderer.appendChild(this.sshy.nativeElement, this.createScript(el))
-    );
-
-    let prch = this.sshy;
-
-    let element = this.createScript("./sshy/terminal_window.js");
-    element.onload = function () {
-      var evt = document.createEvent("Event");
-      evt.initEvent("load", false, false);
-      prch.nativeElement.dispatchEvent(evt);
-
-      eval("baseStartSSHy()");
-    };
-    this.renderer.appendChild(this.sshy.nativeElement, element);
-  }
-
-  createScript(src) {
-    let element = document.createElement("script");
-    element.src = src;
-    element.type = "text/javascript";
-    return element;
-  }
+  constructor() {}
+  ngOnInit() {}
 }

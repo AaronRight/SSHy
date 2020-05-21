@@ -40,12 +40,12 @@
               {
                 "glob": "*.js",
                 "input": "./src/assets/sshy/",
-                "output": "./sshy"
+                "output": "./sshy/"
               },
               {
-                "glob": "*.js",
-                "input": "./src/assets/sshy/src",
-                "output": "./sshy"
+                "glob": "*.css",
+                "input": "./src/assets/sshy/css",
+                "output": "./css/"
               }
             ],
             "styles": ["src/styles.css"],
@@ -109,30 +109,7 @@
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],
-            "scripts": [
-              "src/assets/a.js",
-              "js/auth_handler.js",
-              "js/combinedJS.comb.js",
-              "js/combinedLibs.comb.js",
-              "js/crypto.js",
-              "js/defines.js",
-              "js/dhKex.js",
-              "js/message.js",
-              "js/parceler.js",
-              "js/rsaKey.js",
-              "js/settings.js",
-              "js/SSHyClient.js",
-              "js/terminal_settings.js",
-              "js/terminal_window.js",
-              "js/transport.js",
-              "js/src/aes.min.js",
-              "js/src/BigInteger.min.js",
-              "js/src/Hash.min.js",
-              "js/src/randomart.js",
-              "js/src/struct.min.js",
-              "js/src/utilities.min.js",
-              "js/src/xterm.min.js"
-            ]
+            "scripts": []
           }
         },
         "lint": {

@@ -1,9 +1,9 @@
 {
   "sshy_games": [
-    { "name": "DoomRL", "path": "doomrl", "icon": "games" },
-    { "name": "Dungeon Crawl", "path": "qwerty", "icon": "games" },
-    { "name": "NetHack", "path": "nethack", "icon": "games" },
-    { "name": "Angband", "path": "angband", "icon": "games" }
+    { "name": "DoomRL", "path": "ubuntu", "icon": "games" },
+    { "name": "Dungeon Crawl", "path": "ubuntu", "icon": "games" },
+    { "name": "NetHack", "path": "ubuntu", "icon": "games" },
+    { "name": "Angband", "path": "ubuntu", "icon": "games" }
   ],
   "parchment_games": [
     {

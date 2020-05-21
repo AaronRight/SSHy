@@ -1,16 +1,10 @@
-import { Component, Inject, Injectable } from "@angular/core";
+import { Component, Inject, Injectable, OnInit } from "@angular/core";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 export interface DialogData {
-  animal: string;
-  name: string;
-}
-
-@Injectable()
-export class DataService {
   animal: string;
   name: string;
 }
@@ -67,7 +61,7 @@ export class DialogOverview {
   sshy_games;
   parchment_games;
 
-  constructor(public dataService: DataService, private http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.getJSON().subscribe((data) => {
       this.sshy_games = data.sshy_games;
       this.parchment_games = data.parchment_games;
@@ -83,20 +77,24 @@ export class DialogOverview {
   selector: "dialog-overview-sshy",
   templateUrl: "dialog-overview-sshy.html",
 })
-export class DialogOverviewSSHy {
-  animal: string;
-  name: string;
+export class DialogOverviewSSHy implements OnInit {
+  url: string;
+  login: string;
+  pass: string;
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewSSHy>,
-    private dataService: DataService
-  ) {
-    this.animal = dataService.animal;
-    this.name = dataService.name;
+    private route: ActivatedRoute,
+    @Inject(MAT_DIALOG_DATA) public dialogData: any
+  ) {}
+
+  ngOnInit() {
+    this.login = this.route.queryParams["value"]["game"];
+    this.url = "ws://localhost:5999/18.218.9.36:22";
+    this.pass = "123";
   }
 
   onClose(): void {
-    this.dataService.animal = undefined;
     this.dialogRef.close();
   }
 }
@@ -109,16 +107,9 @@ export class DialogOverviewParchment {
   animal: string;
   name: string;
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewParchment>,
-    private dataService: DataService
-  ) {
-    this.animal = dataService.animal;
-    this.name = dataService.name;
-  }
+  constructor(public dialogRef: MatDialogRef<DialogOverviewParchment>) {}
 
   onClose(): void {
-    this.dataService.animal = undefined;
     this.dialogRef.close();
   }
 }

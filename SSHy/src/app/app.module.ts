@@ -13,17 +13,16 @@ import {
   DialogOverviewParchment,
   DialogEntrySSHyComponent,
   DialogEntryParchmentComponent,
-  DataService,
 } from "./dialog-overview/dialog-overview";
 
 import { AppComponent } from "./app.component";
-import { SshyComponent } from "./sshy/sshy.component";
+import { SshySilentComponent } from "./sshy/sshy.component";
 import { ParchmentComponent } from "./parchment/parchment.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    SshyComponent,
+    SshySilentComponent,
     ParchmentComponent,
     DialogOverview,
     DialogOverviewSSHy,
@@ -56,7 +55,7 @@ import { ParchmentComponent } from "./parchment/parchment.component";
       },
       {
         path: "sshy",
-        component: SshyComponent,
+        component: SshySilentComponent,
       },
       {
         path: "parchment",
@@ -69,7 +68,7 @@ import { ParchmentComponent } from "./parchment/parchment.component";
     DialogOverviewSSHy,
     DialogOverviewParchment,
   ],
-  providers: [DataService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
